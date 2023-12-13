@@ -37,6 +37,7 @@ async function displayPokemon(pokemonResp) {
             const pokemonImage = document.createElement("img");
             pokemonImage.src = pokemon.image.thumbnail; // Adjust according to your JSON structure
             pokemonImage.alt = `Image of ${pokemon.name.english}`; // Use the English name for alt text
+            pokemonImage.loading = "lazy";
             pokemonDiv.appendChild(pokemonImage);
 
             // Name (English)
