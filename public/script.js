@@ -33,7 +33,7 @@ async function displayPokemon(pokemonResp) {
         const headerRow = document.createElement("tr");
 
         // Define headers
-        const headers = ["Image", "Name", "Type", "Description"];
+        const headers = ["Image", "ID", "Name", "Type", "Species", "Description"];
         headers.forEach(headerText => {
             const header = document.createElement("th");
             header.textContent = headerText;
@@ -56,6 +56,11 @@ async function displayPokemon(pokemonResp) {
             dataImage.appendChild(pokemonImage);
             row.appendChild(dataImage);
 
+            // ID data
+            const dataID = document.createElement("td");
+            dataID.textContent = pokemon.id;
+            row.appendChild(dataID);
+
             // Name data
             const dataName = document.createElement("td");
             dataName.textContent = pokemon.name.english;
@@ -65,6 +70,11 @@ async function displayPokemon(pokemonResp) {
             const dataType = document.createElement("td");
             dataType.textContent = pokemon.type.join(', ');
             row.appendChild(dataType);
+
+            // Species data
+            const dataSpecies = document.createElement("td");
+            dataSpecies.textContent = pokemon.species;
+            row.appendChild(dataSpecies);
 
             // Description data
             const dataDescription = document.createElement("td");

@@ -18,6 +18,7 @@ body {
     border: 1px solid black;
     text-align: center;
     padding: 1%;
+    min-width: 50px;
 }
 
 .pokemon-table img {
@@ -25,6 +26,10 @@ body {
     max-height: 100px;
     display: block;
     margin: auto;
+}
+
+.pokemon-table th {
+    background: #b39369;
 }
 
 .pokemon-table td {
