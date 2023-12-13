@@ -42,7 +42,7 @@ app.get("/pokemon", async (req, res) => {
             pokemonQuery = pokemonQuery.filter(pokemon => pokemon.id === searchId);
         }
 
-        console.log(pokemonQuery);
+        // console.log(pokemonQuery);
         res.json(pokemonQuery); // Return the filtered data
 
     } catch (error) {
@@ -56,25 +56,25 @@ app.listen(port, () => {
 });
 
 
-async function setup() {
-    try {
-        const response = await axios.get(pokemonDataUrl);
-        return response.data;
-    } catch (error) {
-        console.error(`Failed to fetch Pokémon data: ${error}`);
-    }
-}
+// async function setup() {
+//     try {
+//         const response = await axios.get(pokemonDataUrl);
+//         return response.data;
+//     } catch (error) {
+//         console.error(`Failed to fetch Pokémon data: ${error}`);
+//     }
+// }
 
-setup().catch((err) => console.error(`Error due to ${err}`));
+// setup().catch((err) => console.error(`Error due to ${err}`));
 
 
-async function main() {
-    const pokemonData = await setup();
-    if (pokemonData) {
-        console.log(pokemonData);
-    } else {
-        console.log("No Pokémon data available.");
-    }
-}
+// async function main() {
+//     const pokemonData = await setup();
+//     if (pokemonData) {
+//         console.log(pokemonData);
+//     } else {
+//         console.log("No Pokémon data available.");
+//     }
+// }
 
-main().catch((err) => console.error(`Error due to ${err}`));
+// main().catch((err) => console.error(`Error due to ${err}`));

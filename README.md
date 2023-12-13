@@ -15,3 +15,5 @@ npm i express cors axios
         "dev": "nodemon server.js"
     },
 ```
+
+npm install (to install all dependencies from package.json)
