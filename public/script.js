@@ -1,17 +1,10 @@
 // Grabs value from HTML input and select fields
 function getQueryString() {
-    // const idInputTextField = document.getElementById('idInputTextField');
-    // const nameInputTextField = document.getElementById('nameInputTextField');
-    // const typeInputTextField = document.getElementById('typeInputTextField');
-    // const speciesInputTextField = document.getElementById('speciesInputTextField');
-    // const sortInputTextField = document.getElementById('sortInputTextField');
-
     const queryObject = {
-        id: idInputTextField.input,
+        id: idInputTextField.value,
         name: nameInputTextField.value,
         type: typeInputTextField.value,
         species: speciesInputTextField.value,
-        // sort: sortInputTextField.value,
     };
 
     // URLSearchParams represents the query string of a URL and returns a URL-encoded query string

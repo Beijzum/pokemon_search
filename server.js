@@ -37,13 +37,14 @@ app.get("/pokemon", async (req, res) => {
                 pokemon.species.toLowerCase().includes(searchSpecies));
         }
 
-        // if (req.query.id) {
-        //     const searchId = parseInt(req.query.id, 10);
-        //     pokemonQuery = pokemonQuery.filter(pokemon => pokemon.id === searchId);
-        // }
+        if (req.query.id) {
+            const searchId = Number(req.query.id);
+            pokemonQuery = pokemonQuery.filter(pokemon => pokemon.id === searchId);
+        }
 
         console.log(pokemonQuery);
         res.json(pokemonQuery); // Return the filtered data
+
     } catch (error) {
         console.error(`Error: ${error}`);
         res.status(500).send("An error occurred while fetching data.");
