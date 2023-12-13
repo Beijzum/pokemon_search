@@ -15,22 +15,35 @@ app.get("/pokemon", async (req, res) => {
     try {
         // Fetch the data
         const response = await axios.get(pokemonDataUrl);
-        const pokemonData = response.data;
+        let pokemonData = response.data;
+        let pokemonQuery = pokemonData;
 
-        // Filter by name
+        // Apply filters conditionally
         if (req.query.name) {
-            const searchQuery = req.query.name.toLowerCase();
-            pokemonData = pokemonData.filter(pokemon =>
-                pokemon.name.toLowerCase().includes(searchQuery))
+            const searchName = req.query.name.toLowerCase();
+            pokemonQuery = pokemonQuery.filter(pokemon =>
+                pokemon.name.english.toLowerCase().includes(searchName));
         }
 
         if (req.query.type) {
-            const searchQuery = req.query.type.toLowerCase();
-            pokemonData = pokemonData.filter(pokemon =>
-                pokemon.type.toLowerCase().includes(searchQuery))
+            const searchType = req.query.type.toLowerCase();
+            pokemonQuery = pokemonQuery.filter(pokemon =>
+                pokemon.type.some(type => type.toLowerCase().includes(searchType)));
         }
 
-        res.json(pokemonData);
+        if (req.query.species) {
+            const searchSpecies = req.query.species.toLowerCase();
+            pokemonQuery = pokemonQuery.filter(pokemon =>
+                pokemon.species.toLowerCase().includes(searchSpecies));
+        }
+
+        // if (req.query.id) {
+        //     const searchId = parseInt(req.query.id, 10);
+        //     pokemonQuery = pokemonQuery.filter(pokemon => pokemon.id === searchId);
+        // }
+
+        console.log(pokemonQuery);
+        res.json(pokemonQuery); // Return the filtered data
     } catch (error) {
         console.error(`Error: ${error}`);
         res.status(500).send("An error occurred while fetching data.");
@@ -40,3 +53,27 @@ app.get("/pokemon", async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+
+async function setup() {
+    try {
+        const response = await axios.get(pokemonDataUrl);
+        return response.data;
+    } catch (error) {
+        console.error(`Failed to fetch Pokémon data: ${error}`);
+    }
+}
+
+setup().catch((err) => console.error(`Error due to ${err}`));
+
+
+async function main() {
+    const pokemonData = await setup();
+    if (pokemonData) {
+        console.log(pokemonData);
+    } else {
+        console.log("No Pokémon data available.");
+    }
+}
+
+main().catch((err) => console.error(`Error due to ${err}`));

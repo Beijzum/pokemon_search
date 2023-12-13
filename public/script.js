@@ -1,6 +1,29 @@
+// Grabs value from HTML input and select fields
+function getQueryString() {
+    // const idInputTextField = document.getElementById('idInputTextField');
+    // const nameInputTextField = document.getElementById('nameInputTextField');
+    // const typeInputTextField = document.getElementById('typeInputTextField');
+    // const speciesInputTextField = document.getElementById('speciesInputTextField');
+    // const sortInputTextField = document.getElementById('sortInputTextField');
+
+    const queryObject = {
+        id: idInputTextField.input,
+        name: nameInputTextField.value,
+        type: typeInputTextField.value,
+        species: speciesInputTextField.value,
+        // sort: sortInputTextField.value,
+    };
+
+    // URLSearchParams represents the query string of a URL and returns a URL-encoded query string
+    return new URLSearchParams(queryObject).toString();
+}
+
 async function getPokemon() {
+    const theQueryString = getQueryString();
     try {
-        const url = "/pokemon";
+        const url = theQueryString
+            ? `http://localhost:3000/pokemon?${theQueryString}`
+            : "/pokemon";
         const response = await fetch(url)
 
         console.log(`Response status: ${response.status}`);
@@ -8,6 +31,8 @@ async function getPokemon() {
         if (response.status === 200) {
             const pokemonResp = await response.json()
             displayPokemon(pokemonResp)
+        } else if (response.status === 500) {
+            console.log("Internal server error");
         }
     } catch (error) {
         console.error(`Error due to ${error}`)
@@ -93,11 +118,23 @@ async function displayPokemon(pokemonResp) {
 async function main() {
     const response = await fetch("/pokemon");
     const pokemonResp = await response.json();
-    // Displays all unicorns first
     displayPokemon(pokemonResp);
 }
 
 main().catch((error) => console.error(`Error due to ${error}`));
+enterKeyListener();
+
+// Listens for enter key to be pressed and returns a click on the getUnicornButton
+function enterKeyListener() {
+    // Event is fired when HTML doc has been loaded and parsed
+    document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                document.getElementById("getPokemonButton").click();
+            }
+        });
+    });
+}
 
 
 // for (let i = 0; i < pokemonResp.length; i++) {
