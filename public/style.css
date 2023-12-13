@@ -1,0 +1,34 @@
+html {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background: #D6D0C8;
+}
+
+.pokemon-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.pokemon-table th,
+.pokemon-table td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 1%;
+}
+
+.pokemon-table img {
+    max-width: 100px;
+    max-height: 100px;
+    display: block;
+    margin: auto;
+}
+
+.pokemon-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px;
+}
