@@ -17,3 +17,5 @@ npm i express cors axios
 ```
 
 npm install (to install all dependencies from package.json)
+
+npm run dev (to run server)
